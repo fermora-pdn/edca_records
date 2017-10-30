@@ -1,3 +1,7 @@
+"""
+merge.py:
+Genera Records y RecordPackages. Los resultados se pueden escribir a disco o almacenar en MongoDB
+"""
 import ocdsmerge
 import pprint
 import json
