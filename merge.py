@@ -22,16 +22,18 @@ def main(argv):
         elif opt in ("-o", "--otype"):
             output = arg
 
-    # Mongo db config
-    client = MongoClient('localhost', 27017)
-    db = client.EDCA
-    collection = db.Releases
+    # MongoDB config
+    # client = MongoClient(os.environ.get("MONGODB_TCP_ADDR",'localhost'), os.environ.get("MONGODB_TCP_PORT", 27017))
+    client = MongoClient("mongodb://" + os.environ.get("BUDA_FRONT_STORAGE","localhost:27017/buda"))
+    buda_db = client.buda # client.EDCA
+    edca_db = client.edca
+    Releases_collection = edca_db.Releases
+    RecordPackages_collection = buda_db['RecordPackages']
+    Records_collection = buda_db["Records"]
 
     output_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "output")
-    # print(output_dir)
 
-    #for ocid in collection.distinct("ocid"):
-    for cp in collection.aggregate([{"$group": {"_id": "$ocid", "conteo": {"$sum": 1 }}}]):
+    for cp in Releases_collection.aggregate([{"$group": {"_id": "$ocid", "conteo": {"$sum": 1 }}}]):
         ocid = cp["_id"]
         # print('Processing -> ', ocid)
 
@@ -61,7 +63,7 @@ def main(argv):
         releases = []
 
         #if cp["conteo"] > 1:
-        for release in collection.find({"ocid": ocid}, {"_id": 0}):
+        for release in Releases_collection.find({"ocid": ocid}, {"_id": 0}):
             # pprint.pprint(release['date'])
             releases.append(release)
 
@@ -72,6 +74,7 @@ def main(argv):
         except:
             print("failed -> ", releases[0]["ocid"])
             failed = True
+
         # record["versionedRelease"] = ocdsmerge.merge_versioned(releases)
 
         recordPackage["records"].append(record)
@@ -79,13 +82,14 @@ def main(argv):
         if not failed:
             if output.lower() == "mongo":
                 # insert RecordPackage to mongodb
-                RecordPackages = db['RecordPackages']
                 # update record if ocid exists in collection
-                rp = db.RecordPackages.find_one({"records.compiledRelease.ocid": ocid}, {"_id":1})
+                rp = RecordPackages_collection.find_one({"records.compiledRelease.ocid": ocid}, {"_id":1})
                 if rp is not None:
-                    db.RecordPackages.update(rp, recordPackage)
+                    RecordPackages_collection.update(rp, recordPackage)
+                    # Records_collection.update()
                 else:
-                    RecordPackages.insert_one(recordPackage)
+                    RecordPackages_collection.insert_one(recordPackage)
+                    # Records_collection.insert_one()
             else:
                 # write JSON
                 file_path = os.path.join(output_dir, ocid + ".json")
