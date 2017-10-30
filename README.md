@@ -12,6 +12,6 @@ Genera [_Records_](http://standard.open-contracting.org/latest/en/schema/records
 
  ### Importar JSON (_Release Packages_)
 
- ```bash ../import_json.sh <dir_name>```
+ ```bash import_json.sh <dir_name>```
 
  ### Inicio rápido
