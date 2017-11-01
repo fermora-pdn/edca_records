@@ -15,3 +15,11 @@ Genera [_Records_](http://standard.open-contracting.org/latest/en/schema/records
  ```bash import_json.sh <dir_name>```
 
  ### Inicio rápido
+
+ ### Instalación Docker
+ 
+ #### Construcción de la imagen docker
+ `docker built -t mxabierto/edca_records:development .`
+
+ #### Construcción contenedor
+ `docker run --name edca_dashboard -e TZ='America/Mexico_City' -d mxabierto/edca_records:develpment`
