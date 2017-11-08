@@ -87,6 +87,7 @@ def main(argv):
             if output.lower() == "mongo":
                 # insert RecordPackage to mongodb
                 # update record if ocid exists in collection
+                """
                 rp = RecordPackages_collection.find_one({"records.compiledRelease.ocid": ocid}, {"_id":1})
                 if rp is not None:
                     RecordPackages_collection.update(rp, recordPackage)
@@ -94,6 +95,9 @@ def main(argv):
                 else:
                     RecordPackages_collection.insert_one(recordPackage)
                     # Records_collection.insert_one()
+                """
+                RecordPackages_collection.insert_one(recordPackage)
+                Records_collection.insert_one(recordPackage["records"][0])
             else:
                 # write JSON
                 file_path = os.path.join(output_dir, ocid + ".json")
