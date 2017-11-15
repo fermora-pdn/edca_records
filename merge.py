@@ -32,7 +32,7 @@ def main(argv):
     buda_db = client.buda # client.EDCA
     edca_db = client.edca
     Releases_collection = edca_db.Releases
-    RecordPackages_collection = buda_db['RecordPackages']
+    RecordPackages_collection = buda_db['contratacionesabiertas']
     Records_collection = buda_db["Records"]
 
     output_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "output")
