@@ -22,6 +22,11 @@ compiledRelease.tender.status
 compiledRelease.tender.enquiryPeriod.startDate
 compiledRelease.tender.enquiryPeriod.endDate
 compiledRelease.tender.tenderers
+compiledRelease.awards.title
+compiledRelease.awards.description
+compiledRelease.awards.suppliers
 compiledRelease.awards
+compiledRelease.contracts.title
+compiledRelease.contracts.description
 compiledRelease.contracts
 releases
