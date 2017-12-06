@@ -51,7 +51,7 @@ def main(argv):
             "https://raw.githubusercontent.com/open-contracting/ocds_contract_suppliers_extension/master/extension.json"
         ]
         recordPackage["license"] = "https://datos.gob.mx/libreusomx"
-        recordPackage["publicationPolicy"] = "https://datos.gob.mx/libreusomx"
+        # recordPackage["publicationPolicy"] = "https://datos.gob.mx/libreusomx"
         recordPackage["publishedDate"] = str(datetime.datetime.utcnow().isoformat()) + 'Z'
 
         recordPackage["publisher"] = {}
