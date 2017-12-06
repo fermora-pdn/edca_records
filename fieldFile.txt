@@ -24,16 +24,5 @@ compiledRelease.tender.enquiryPeriod.startDate
 compiledRelease.tender.enquiryPeriod.endDate
 compiledRelease.tender.tenderers
 compiledRelease.awards
-compiledRelease.awards.title
-compiledRelease.awards.description
-compiledRelease.awards.status
-compiledRelease.awards.value.amount
-compiledRelease.awards.value.currency
-compiledRelease.awards.suppliers
 compiledRelease.contracts
-compiledRelease.contracts.title
-compiledRelease.contracts.description
-compiledRelease.contracts.status
-compiledRelease.contracts.value.amount
-compiledRelease.contracts.value.currency
 releases
