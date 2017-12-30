@@ -41,7 +41,7 @@ def main(argv):
     conteo = Releases_collection.count()
     pbar = tqdm(total = conteo)
 
-    print ("conteo -> "+ str(conteo))
+    #print ("conteo -> "+ str(conteo))
     for cp in Releases_collection.aggregate([{"$group": {"_id": "$ocid", "conteo": {"$sum": 1 }}}]):
         ocid = cp["_id"]
         # print('Processing -> ', ocid)
