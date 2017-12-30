@@ -10,6 +10,7 @@ import os
 import sys
 import getopt
 import codecs
+from tqdm import tqdm
 from pymongo import MongoClient
 
 def main(argv):
@@ -37,6 +38,10 @@ def main(argv):
 
     output_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "output")
 
+    conteo = Releases_collection.count()
+    pbar = tqdm(total = conteo)
+
+    print ("conteo -> "+ str(conteo))
     for cp in Releases_collection.aggregate([{"$group": {"_id": "$ocid", "conteo": {"$sum": 1 }}}]):
         ocid = cp["_id"]
         # print('Processing -> ', ocid)
@@ -65,7 +70,6 @@ def main(argv):
         record = {}
         record['ocid'] = ocid
         releases = []
-
         #if cp["conteo"] > 1:
         for release in Releases_collection.find({"ocid": ocid}, {"_id": 0}):
             # pprint.pprint(release['date'])
@@ -103,7 +107,10 @@ def main(argv):
                 file_path = os.path.join(output_dir, ocid + ".json")
                 with codecs.open(file_path, 'w', encoding='utf-8') as outfile:
                     json.dump(recordPackage, outfile,ensure_ascii=True,  indent=4)
-
+                    
+        # update progress bar
+        pbar.update(cp.get("conteo", 0))
+    pbar.close()
 
 if __name__ == "__main__":
     main(sys.argv[1:])
