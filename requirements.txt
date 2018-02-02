@@ -2,7 +2,8 @@ certifi==2017.7.27.1
 chardet==3.0.4
 colorama==0.3.7
 idna==2.6
-ocdsmerge==0.3
+jsonref==0.1
+ocdsmerge==0.4
 pprint==0.1
 pyasn1==0.2.3
 pymongo==3.5.1
