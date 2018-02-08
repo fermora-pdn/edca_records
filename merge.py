@@ -78,7 +78,7 @@ def main(argv):
         record["releases"] = releases
         failed = False
         try:
-            record["compiledRelease"] = ocdsmerge.merge(releases)
+            record["compiledRelease"] = ocdsmerge.merge(releases, 'release-schema.json')
         except:
             print("failed -> ", releases[0]["ocid"])
             failed = True
