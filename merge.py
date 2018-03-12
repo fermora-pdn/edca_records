@@ -53,10 +53,12 @@ def main(argv):
             "https://raw.githubusercontent.com/open-contracting/ocds_location_extension/v1.1.1/extension.json",
             "https://raw.githubusercontent.com/open-contracting/ocds_additionalContactPoints_extension/master/extension.json",
             "https://raw.githubusercontent.com/open-contracting/ocds_budget_breakdown_extension/master/extension.json",
-            "https://raw.githubusercontent.com/open-contracting/ocds_contract_suppliers_extension/master/extension.json"
+            "https://raw.githubusercontent.com/open-contracting/ocds_contract_suppliers_extension/master/extension.json",
+            "https://raw.githubusercontent.com/CompraNet/ocds_releasePublisher_extension/master/extension.json",
+            "https://raw.githubusercontent.com/CompraNet/ocds_schemeUrl_extension/master/extension.json"
         ]
         recordPackage["license"] = "https://datos.gob.mx/libreusomx"
-        # recordPackage["publicationPolicy"] = "https://datos.gob.mx/libreusomx"
+        recordPackage["publicationPolicy"] = "https://compranetinfo.funcionpublica.gob.mx/descargas/politica-publicacion-EDCA-MX.pdf"
         recordPackage["publishedDate"] = str(datetime.datetime.utcnow().isoformat()) + 'Z'
 
         recordPackage["publisher"] = {}
