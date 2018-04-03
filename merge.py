@@ -47,7 +47,7 @@ def main(argv):
         # print('Processing -> ', ocid)
 
         recordPackage = {}
-        recordPackage["uri"] = "https://api.datos.gob.mx/v1/"
+        recordPackage["uri"] = "https://api.datos.gob.mx/v2/"
         recordPackage["version"] = "1.1"
         recordPackage["extensions"] = [
             "https://raw.githubusercontent.com/open-contracting/ocds_location_extension/v1.1.1/extension.json",
