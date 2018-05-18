@@ -47,7 +47,7 @@ def main(argv):
         # print('Processing -> ', ocid)
 
         recordPackage = {}
-        recordPackage["uri"] = "https://api.datos.gob.mx/v2/"
+        recordPackage["uri"] = "https://api.datos.gob.mx/v2/contratacionesabiertas?_id="
         recordPackage["version"] = "1.1"
         recordPackage["extensions"] = [
             "https://raw.githubusercontent.com/open-contracting/ocds_location_extension/v1.1.1/extension.json",
@@ -103,7 +103,9 @@ def main(argv):
                     # Records_collection.insert_one()
                 """
                 RecordPackages_collection.insert_one(recordPackage)
-                Records_collection.insert_one(recordPackage["records"][0])
+                recordPackage['uri'] += str(recordPackage['_id'])
+                RecordPackages_collection.update_one({'_id': recordPackage['_id']},{"$set": recordPackage}, upsert=False)
+                Records_collection.insert_one(recordPackage["records"][0], False)
             else:
                 # write JSON
                 file_path = os.path.join(output_dir, ocid + ".json")
