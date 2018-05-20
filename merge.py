@@ -47,7 +47,7 @@ def main(argv):
         # print('Processing -> ', ocid)
 
         recordPackage = {}
-        recordPackage["uri"] = "https://api.datos.gob.mx/v2/contratacionesabiertas?_id="
+        recordPackage["uri"] = "https://api.datos.gob.mx/v2/contratacionesabiertas?records.compiledRelease.ocid="
         recordPackage["version"] = "1.1"
         recordPackage["extensions"] = [
             "https://raw.githubusercontent.com/open-contracting/ocds_location_extension/v1.1.1/extension.json",
@@ -88,6 +88,7 @@ def main(argv):
         # record["versionedRelease"] = ocdsmerge.merge_versioned(releases)
 
         recordPackage["records"].append(record)
+        recordPackage["uri"] += ocid
 
         if not failed:
             if output.lower() == "mongo":
@@ -103,8 +104,6 @@ def main(argv):
                     # Records_collection.insert_one()
                 """
                 RecordPackages_collection.insert_one(recordPackage)
-                recordPackage['uri'] += str(recordPackage['_id'])
-                RecordPackages_collection.update_one({'_id': recordPackage['_id']},{"$set": recordPackage}, upsert=False)
                 Records_collection.insert_one(recordPackage["records"][0], False)
             else:
                 # write JSON
