@@ -11,7 +11,7 @@ from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.edca
 
-releases = db.Releases
+releases_sfp = db.Releases_SFP
 
 
 def main(argv):
@@ -19,11 +19,11 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "hp:", ["help", "path="])
     except getopt.GetoptError:
-        print ('update_releases.py -p <json_path>')
+        print ('update_releases_sfp.py -p <json_path>')
         sys.exit(2)
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            print ('update_releases.py -p <json_path>')
+            print ('update_releases_sfp.py -p <json_path>')
             sys.exit()
         elif opt in ("-p", "--path"):
             json_path = arg
@@ -42,11 +42,11 @@ def main(argv):
                 ocid = d['releases'][0]['ocid']
                 print ('ocid -> ', ocid)
                 # delete release if exists
-                removed = releases.remove({"ocid": ocid}, {'justOne': False})
+                removed = releases_sfp.remove({"ocid": ocid}, {'justOne': False})
                 if removed['n'] > 0:
                     print('replacing -> ', ocid)
                 # insert release
-                releases.insert_one(d['releases'][0])
+                releases_sfp.insert_one(d['releases'][0])
 
 
 if __name__ == "__main__":
