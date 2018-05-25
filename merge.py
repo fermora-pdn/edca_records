@@ -16,13 +16,13 @@ from pymongo import MongoClient
 def main(argv):
     output = ''
     try:
-        opts, args = getopt.getopt(argv, "ho:", ["otype="])
+        opts, args = getopt.getopt(argv, "ho:", ["help", "otype="])
     except getopt.GetoptError:
         print ('merge.py -o <output_type>')
         sys.exit(2)
     for opt, arg in opts:
-        if opt == '-h':
-            print ('test.py -o <output_type>')
+        if opt in ('-h', '--help'):
+            print ('merge.py -o <output_type>')
             sys.exit()
         elif opt in ("-o", "--otype"):
             output = arg
