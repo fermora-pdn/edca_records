@@ -8,7 +8,7 @@ Genera [_Records_](http://standard.open-contracting.org/latest/en/schema/records
  - [jq](https://stedolan.github.io/jq/)
 
  ### Instalación
- `cd edca-records/ && pip install -r requirements.txt`
+ `cd edca_records/ && pip install -r requirements.txt`
 
  ### Importar JSON (_Release Packages_)
 
