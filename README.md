@@ -7,7 +7,11 @@ Genera [_Records_](http://standard.open-contracting.org/latest/en/schema/records
  - [Python](https://www.python.org/downloads/) v3.4 or later
  - [jq](https://stedolan.github.io/jq/)
 
- ### Instalación
+### Creación de entorno
+ - Creamos ambiente de Python con versión v3.4
+   conda create --name edca_env
+
+ ### Instalación de paquetes
  `cd edca-records/ && pip install -r requirements.txt`
 
  ### Importar JSON (_Release Packages_)
